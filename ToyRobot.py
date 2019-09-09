@@ -31,7 +31,7 @@ class Robot:
     def rotate(self, instruction):
 
         if instruction not in ('LEFT', 'RIGHT'):
-            print("Invalid rotate instruction. Please tell PacMan to rotate either LEFT or RIGHT")
+            print("Invalid rotate instruction. Please tell the robot to rotate either LEFT or RIGHT")
 
         if instruction is 'LEFT' and self.direction_index is 0:
             self.direction_index = len(self.direction) - 1
