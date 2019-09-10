@@ -86,9 +86,9 @@ class TestRobot(unittest.TestCase):
 
     def test_move_north_when_at_top_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(3, 4, 'NORTH')
+        robot.place(3, 5, 'NORTH')
         robot.move()
-        expected = "3,4,NORTH"
+        expected = "3,5,NORTH"
         self.assertEqual(robot.report(), expected)
 
     def test_move_south_when_at_bottom_of_grid(self):
@@ -107,25 +107,25 @@ class TestRobot(unittest.TestCase):
 
     def test_move_east_when_at_right_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(4, 3, 'EAST')
+        robot.place(5, 3, 'EAST')
         robot.move()
-        expected = "4,3,EAST"
+        expected = "5,3,EAST"
         self.assertEqual(robot.report(), expected)
 
     # TESTING INVALID MOVES FROM CORNERS OF GRID
 
     def test_move_north_when_at_north_west_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(0, 4, 'NORTH')
+        robot.place(0, 5, 'NORTH')
         robot.move()
-        expected = "0,4,NORTH"
+        expected = "0,5,NORTH"
         self.assertEqual(robot.report(), expected)
 
     def test_move_west_when_at_north_west_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(0, 4, 'WEST')
+        robot.place(0, 5, 'WEST')
         robot.move()
-        expected = "0,4,WEST"
+        expected = "0,5,WEST"
         self.assertEqual(robot.report(), expected)
 
     def test_move_west_when_at_south_west_of_grid(self):
@@ -144,30 +144,30 @@ class TestRobot(unittest.TestCase):
 
     def test_move_south_when_at_south_east_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(4, 0, 'SOUTH')
+        robot.place(5, 0, 'SOUTH')
         robot.move()
-        expected = "4,0,SOUTH"
+        expected = "5,0,SOUTH"
         self.assertEqual(robot.report(), expected)
 
     def test_move_east_when_at_south_east_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(4, 0, 'EAST')
+        robot.place(5, 0, 'EAST')
         robot.move()
-        expected = "4,0,EAST"
+        expected = "5,0,EAST"
         self.assertEqual(robot.report(), expected)
 
     def test_move_east_when_at_north_east_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(4, 4, 'EAST')
+        robot.place(5, 5, 'EAST')
         robot.move()
-        expected = "4,4,EAST"
+        expected = "5,5,EAST"
         self.assertEqual(robot.report(), expected)
 
     def test_move_north_when_at_north_east_of_grid(self):
         robot = ToyRobot.Robot()
-        robot.place(4, 4, 'NORTH')
+        robot.place(5, 5, 'NORTH')
         robot.move()
-        expected = "4,4,NORTH"
+        expected = "5,5,NORTH"
         self.assertEqual(robot.report(), expected)
 
     # TESTING ROTATING LEFT AND RIGHT

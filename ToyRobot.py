@@ -2,7 +2,7 @@ class Robot:
 
     direction = ['NORTH', 'EAST', 'SOUTH', 'WEST']
     min_pos = 0
-    max_pos = 4
+    max_pos = 5
     direction_index = None
 
     def __init__(self, x=None, y=None, f=None):
@@ -14,10 +14,10 @@ class Robot:
     # into the method. The invalid input guards are included in case of future modification.
     def place(self, x, y, f):
         if x < self.min_pos or x > self.max_pos:
-            print("Invalid coordinates. Please enter x and y values between 0 and 4 inclusive")
+            print("Invalid coordinates. Please enter x and y values between 0 and 5 inclusive")
             return
         if y < self.min_pos or y > self.max_pos:
-            print("Invalid coordinates. Please enter x and y values between 0 and 4 inclusive")
+            print("Invalid coordinates. Please enter x and y values between 0 and 5 inclusive")
             return
         if f not in self.direction:
             print("Invalid direction. Please enter a direction of NORTH, SOUTH, EAST OR WEST")

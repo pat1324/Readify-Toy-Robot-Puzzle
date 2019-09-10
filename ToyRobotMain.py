@@ -6,7 +6,7 @@ import ToyRobot
 command = ''
 robot = ToyRobot.Robot()
 is_placed = False
-regex = re.compile(r'^PLACE\s[0-4][,][0-4][,](NORTH|SOUTH|EAST|WEST)')  # uses regex to enforce valid PLACE input
+regex = re.compile(r'^PLACE\s[0-5][,][0-5][,](NORTH|SOUTH|EAST|WEST)')  # uses regex to enforce valid PLACE input
 
 while True:
     command = input("Enter an instruction for robot to execute: ")
@@ -20,7 +20,7 @@ while True:
             robot.place(int(coords[0]), int(coords[1]), start_direction)
         else:
             print("Invalid input. Use the place command to place robot"
-                  " with the format 'PLACE X,X,DIRECTION' where X is between 0 and 4 inclusive and DIRECTION is one of "
+                  " with the format 'PLACE X,X,DIRECTION' where X is between 0 and 5 inclusive and DIRECTION is one of "
                   "NORTH/SOUTH/EAST/WEST")
             continue
     else:
@@ -37,5 +37,5 @@ while True:
         elif command == 'REPORT':
             print(robot.report())
         else:
-            print("Invalid command. Valid commands are: PLACE X,X,DIRECTION (X between 0-4 inclusive, DIRECTION is "
+            print("Invalid command. Valid commands are: PLACE X,X,DIRECTION (X between 0-5 inclusive, DIRECTION is "
                   " one of NORTH/SOUTH/EAST/WEST, MOVE, LEFT, RIGHT, REPORT")
