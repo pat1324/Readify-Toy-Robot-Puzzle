@@ -15,20 +15,24 @@ class Robot:
 
     # Places robot on the grid. The use of regex to enforce valid input means that invalid coordinates cannot be passed
     # into the method. The invalid input guards are included in case of future modification.
-    def place(self, x, y, f):
+    def place(self, x, y, f=None):
         if x < self.min_pos or x > self.max_pos:
             return "Invalid coordinates. Please enter x and y values between 0 and 5 inclusive"
         if y < self.min_pos or y > self.max_pos:
             return "Invalid coordinates. Please enter x and y values between 0 and 5 inclusive"
-        if f not in self.direction:
+        if f not in self.direction and f != None:
             return "Invalid direction. Please enter a direction of NORTH, SOUTH, EAST OR WEST"
         if [x,y] in self.obstacles:
             return "Coordinates are designated to be avoided, please enter another location"
         self.x = x
         self.y = y
-        self.f = f
-        self.direction_index = self.direction.index(self.f)  # tracks direction in the direction list
-        self.place_flag = True
+        if f == None:
+            pass
+        else:
+            self.f = f
+            self.direction_index = self.direction.index(self.f)  # tracks direction in the direction list
+            self.place_flag = True
+
 
     def avoid(self, x, y):
         if x < self.min_pos or x > self.max_pos:
@@ -111,6 +115,9 @@ class Robot:
 
     def clear_obstacles(self):
         self.obstacles = []
+
+    def report_placed(self):
+        return self.place_flag
 
     # Reports the current location/coordinates of the robot
     def report(self):
