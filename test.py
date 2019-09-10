@@ -200,6 +200,5 @@ class TestRobot(unittest.TestCase):
         expected = "2,0,NORTH"
         self.assertEqual(robot.report(), expected)
 
-
 if __name__ == "__main__":
     unittest.main()

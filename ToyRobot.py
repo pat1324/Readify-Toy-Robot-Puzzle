@@ -4,28 +4,47 @@ class Robot:
     min_pos = 0
     max_pos = 5
     direction_index = None
+    obstacles = []
+    place_flag = False
 
-    def __init__(self, x=None, y=None, f=None):
+    def __init__(self, x=None, y=None, f=None, o=[]):
         self.x = x
         self.y = y
         self.f = f
+        self.obstacles = o
 
     # Places robot on the grid. The use of regex to enforce valid input means that invalid coordinates cannot be passed
     # into the method. The invalid input guards are included in case of future modification.
     def place(self, x, y, f):
+        if x < self.min_pos or x > self.max_pos:
+            return "Invalid coordinates. Please enter x and y values between 0 and 5 inclusive"
+        if y < self.min_pos or y > self.max_pos:
+            return "Invalid coordinates. Please enter x and y values between 0 and 5 inclusive"
+        if f not in self.direction:
+            return "Invalid direction. Please enter a direction of NORTH, SOUTH, EAST OR WEST"
+        if [x,y] in self.obstacles:
+            return "Coordinates are designated to be avoided, please enter another location"
+        self.x = x
+        self.y = y
+        self.f = f
+        self.direction_index = self.direction.index(self.f)  # tracks direction in the direction list
+        self.place_flag = True
+
+    def avoid(self, x, y):
         if x < self.min_pos or x > self.max_pos:
             print("Invalid coordinates. Please enter x and y values between 0 and 5 inclusive")
             return
         if y < self.min_pos or y > self.max_pos:
             print("Invalid coordinates. Please enter x and y values between 0 and 5 inclusive")
             return
-        if f not in self.direction:
-            print("Invalid direction. Please enter a direction of NORTH, SOUTH, EAST OR WEST")
+        if x == self.x and y == self.y:
+            print("Robot is in this location, invalid coordinates")
             return
-        self.x = x
-        self.y = y
-        self.f = f
-        self.direction_index = self.direction.index(self.f)  # tracks direction in the direction list
+        if [x,y] in self.obstacles:
+            print("Cell is already designated to be avoided")
+            return
+        coords = [x, y]
+        self.obstacles.append(coords)
 
     # Turns robot left or right depending on the instruction argument
     def rotate(self, instruction):
@@ -45,7 +64,7 @@ class Robot:
 
     # Moves robot one unit in the direction it is facing
     def move(self):
-
+        current_position = [self.x, self.y]
         # invalid moves/corner
         if self.x == self.y == self.min_pos and (self.f == 'WEST' or self.f == 'SOUTH'):
             print("Robot is in the south west corner facing " + self.f + " and can no longer move forward")
@@ -84,7 +103,20 @@ class Robot:
         elif self.f == 'WEST':
             self.x -= 1
 
+        # check for obstacles
+        if [self.x, self.y] in self.obstacles:
+            print("Cell is obstructed, robot did not move")
+            self.x = current_position[0]
+            self.y = current_position[1]
+
+    def clear_obstacles(self):
+        self.obstacles = []
+
     # Reports the current location/coordinates of the robot
     def report(self):
         report_string = str(self.x) + "," + str(self.y) + "," + self.f
         return report_string
+
+    def report_obstacles(self):
+        print(self.obstacles)
+        return self.obstacles
